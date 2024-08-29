@@ -1,0 +1,4 @@
+DROP DATABASE
+CREATE DATABASE
+You are now connected to database "planets" as user "johnhaastrup".
+CREATE TABLE
