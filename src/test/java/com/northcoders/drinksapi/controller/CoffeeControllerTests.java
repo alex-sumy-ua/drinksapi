@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -19,11 +20,16 @@ public class CoffeeControllerTests {
     public void testCoffeeControllerOutput() throws Exception {
 
         String expectedValue = "latte";
+        int expectedId = 1;
+
+        // Use the .param() method after the .get() to pass in a request param into the test.
 
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/coffee"))
+                        MockMvcRequestBuilders.get("/coffee")
+                                .param(expectedValue, String.valueOf(expectedId)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedValue));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedValue))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedId));
 
     }
 
