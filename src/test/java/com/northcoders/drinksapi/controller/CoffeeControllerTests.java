@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class CoffeeControllerTest {
+public class CoffeeControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -18,13 +18,12 @@ public class CoffeeControllerTest {
     @Test
     public void testCoffeeControllerOutput() throws Exception {
 
-
-        String expectedContent = "I Like Coffee!";
+        String expectedValue = "latte";
 
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/coffeelover"))
+                        MockMvcRequestBuilders.get("/coffee"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(expectedValue));
 
     }
 
